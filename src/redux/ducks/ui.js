@@ -19,6 +19,8 @@ export const initialState = {
     Representation: true,  // Closed
     View: true,            // Closed
     RenderViewSettingsCollapsed: false, // Open
+
+    collapsibleGroups: {},
   },
 };
 
