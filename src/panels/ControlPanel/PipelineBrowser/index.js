@@ -42,6 +42,7 @@ export const PipelineBrowser = React.createClass({
     updatePreset: React.PropTypes.func,
     updateScalarRange: React.PropTypes.func,
     updateCollapsableState: React.PropTypes.func,
+    updateGroupCollapsibleState: React.PropTypes.func,
     setOpacityPoints: React.PropTypes.func,
     onOpacityEditModeChange: React.PropTypes.func,
   },
@@ -144,6 +145,7 @@ export const PipelineBrowser = React.createClass({
               sections={sections}
               onApply={this.applyChanges}
               onCollapseChange={this.props.updateCollapsableState}
+              onGroupCollapseChange={this.props.updateGroupCollapsibleState}
             >
               <ColorByWidget
                 className={style.colorBy}
@@ -211,6 +213,9 @@ export default connect(
       },
       updateCollapsableState(name, isOpen) {
         dispatch(actions.ui.updateCollapsableState(name, isOpen));
+      },
+      updateGroupCollapsibleState(name, isOpen) {
+        dispatch(actions.ui.updateGroupCollapsedState(name, isOpen));
       },
       scalarBar: ({ source, visible }) => {
         dispatch(actions.colors.showScalarBar(source, visible));
