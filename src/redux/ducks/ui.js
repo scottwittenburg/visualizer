@@ -40,7 +40,7 @@ export default function reducer(state = initialState, action) {
     case UPDATE_GROUP_COLLAPSED_STATE: {
       const groupState = Object.assign({}, state.collapsableState.collapsibleGroups, { [action.name]: action.expanded });
       const collapsableState = Object.assign({}, state.collapsableState, { collapsibleGroups: groupState });
-      return Object.assign({}, state, collapsableState);
+      return Object.assign({}, state, { collapsableState });
     }
 
     case 'RESET_VISUALIZER_STATE': {

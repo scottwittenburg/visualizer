@@ -2,11 +2,27 @@ import { createSelector } from 'reselect';
 import access from './stateAccessor';
 
 // ----------------------------------------------------------------------------
-// Convenience methods
+// Convenience methods to traverse through a proxies property and ui arrays
+// to update the collapsed state of the various collapsible groups that may be
+// present.
 // ----------------------------------------------------------------------------
 
+function checkPropertyList(propList, uiList, groupCollapseState) {
+  propList.forEach((prop, idx) => {
+    const ui = uiList[idx];
+    const id = [prop.id, prop.name].join(':');
+    if (id in groupCollapseState) {
+      prop.value = !groupCollapseState[id];
+    }
+
+    if (prop.children) {
+      checkPropertyList(prop.children, ui.children, groupCollapseState);
+    }
+  });
+}
+
 function decorateCollapsibleGroups(proxy, groupCollapseState) {
-  console.log('groupCollapseState: ', groupCollapseState);
+  checkPropertyList(proxy.properties, proxy.ui, groupCollapseState);
   return proxy;
 }
 
