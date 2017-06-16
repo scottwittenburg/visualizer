@@ -38,7 +38,7 @@ export default function reducer(state = initialState, action) {
     }
 
     case UPDATE_GROUP_COLLAPSED_STATE: {
-      const groupState = Object.assign({}, state.collapsableState.collapsibleGroups, { [action.name]: action.expanded });
+      const groupState = Object.assign({}, state.collapsableState.collapsibleGroups, { [action.name]: action.open });
       const collapsableState = Object.assign({}, state.collapsableState, { collapsibleGroups: groupState });
       return Object.assign({}, state, { collapsableState });
     }
@@ -60,10 +60,10 @@ export function updateVisiblePanel(index) {
   return { type: UPDATE_VISIBLE_PANEL, index };
 }
 
-export function updateCollapsableState(name, open) {
-  return { type: UPDATE_COLLAPSABLE_STATE, name, open };
-}
+export function updateCollapsableState(name, open, isGroup) {
+  if (isGroup) {
+    return { type: UPDATE_GROUP_COLLAPSED_STATE, name, open };
+  }
 
-export function updateGroupCollapsedState(name, expanded) {
-  return { type: UPDATE_GROUP_COLLAPSED_STATE, name, expanded };
+  return { type: UPDATE_COLLAPSABLE_STATE, name, open };
 }

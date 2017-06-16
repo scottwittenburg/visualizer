@@ -145,7 +145,6 @@ export const PipelineBrowser = React.createClass({
               sections={sections}
               onApply={this.applyChanges}
               onCollapseChange={this.props.updateCollapsableState}
-              onGroupCollapseChange={this.props.updateGroupCollapsibleState}
             >
               <ColorByWidget
                 className={style.colorBy}
@@ -211,11 +210,8 @@ export default connect(
         dispatch(actions.colors.rescaleTransferFunction(options));
         dispatch(actions.colors.fetchLookupTableScalarRange(selectors.proxies.getActiveSourceId(state)));
       },
-      updateCollapsableState(name, isOpen) {
-        dispatch(actions.ui.updateCollapsableState(name, isOpen));
-      },
-      updateGroupCollapsibleState(name, isOpen) {
-        dispatch(actions.ui.updateGroupCollapsedState(name, isOpen));
+      updateCollapsableState(name, isOpen, isGroup) {
+        dispatch(actions.ui.updateCollapsableState(name, isOpen, isGroup));
       },
       scalarBar: ({ source, visible }) => {
         dispatch(actions.colors.showScalarBar(source, visible));
