@@ -17,6 +17,7 @@ module.exports = {
     'react/prefer-es6-class': 0,
     'no-nested-ternary': 0,
     'jsx-a11y/no-static-element-interactions': 0,
+    'jsx-a11y/click-events-have-key-events': 0,
     'react/no-unused-prop-types': 0,
     'react/forbid-prop-types': 0,
 
